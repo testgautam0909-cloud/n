@@ -184,3 +184,185 @@ export const Dashboard = () => (
     ],
   },
 ];
+
+
+
+/* 
+
+data need to add
+
+{
+  id: 'domain',
+  title: '🧠 Domain Modeling & State Clarity',
+  items: [
+    {
+      id: 'domain-1',
+      text: 'Each domain concept (Call, SMS, etc.) has a clear, explicit representation (type, enum, or component)'
+    },
+    {
+      id: 'domain-2',
+      text: 'Avoided inferring domain meaning from boolean combinations'
+    },
+    {
+      id: 'domain-3',
+      text: 'Invalid or impossible states are not representable in code'
+    },
+    {
+      id: 'domain-4',
+      text: 'Different workflows (e.g., Call vs SMS) are not merged unless behavior is truly identical'
+    },
+    {
+      id: 'domain-5',
+      text: 'Success, failure, and partial states are explicitly modeled (not implied)'
+    }
+  ],
+  codeExample: `// Good: explicit domain modeling
+type CommunicationType = 'CALL' | 'SMS';
+
+type CallState =
+  | 'FAILED'
+  | 'EMPTY_TRANSCRIPT'
+  | 'SUCCESS';
+
+// Bad: implicit domain logic
+const isUnsuccessfulCall =
+  !isFailed && !isSMSFailed && isEmptyTranscript;`
+}
+
+
+
+{
+  id: 'conditions',
+  title: '🔀 Conditional Complexity',
+  items: [
+    {
+      id: 'cond-1',
+      text: 'No more than 2–3 boolean conditions per render branch'
+    },
+    {
+      id: 'cond-2',
+      text: 'Nested ternaries avoided in favor of early returns or switch statements'
+    },
+    {
+      id: 'cond-3',
+      text: 'Condition names clearly describe business meaning, not implementation detail'
+    },
+    {
+      id: 'cond-4',
+      text: 'Complex condition logic extracted into named helpers or state derivation functions'
+    }
+  ],
+  codeExample: `// Good
+switch (callState) {
+  case 'FAILED':
+    return <CallFailed />;
+  case 'EMPTY_TRANSCRIPT':
+    return <EmptyCall />;
+  case 'SUCCESS':
+    return <Transcript />;
+}
+
+// Bad
+isSMSFailed ? ... : isFailed ? ... : isUnsuccessfulCall ? ... : ...`
+}
+
+
+
+{
+  id: 'boundaries',
+  title: '🧩 Component Responsibility & Boundaries',
+  items: [
+    {
+      id: 'bound-1',
+      text: 'Component has a single, clearly defined responsibility'
+    },
+    {
+      id: 'bound-2',
+      text: 'Component does not represent multiple domain concepts at once'
+    },
+    {
+      id: 'bound-3',
+      text: 'If behavior diverges, components are split rather than conditionally branched'
+    },
+    {
+      id: 'bound-4',
+      text: 'Shared UI is extracted only after duplication is proven'
+    }
+  ],
+  examples: {
+    good: [
+      'CallInfoContent vs SMSInfoContent',
+      'Separate ErrorState components'
+    ],
+    bad: [
+      'One component with many isX flags',
+      'Domain switching inside JSX'
+    ]
+  }
+}
+
+
+
+{
+  id: 'state',
+  title: '📐 State Derivation & Data Flow',
+  items: [
+    {
+      id: 'state-1',
+      text: 'Derived state is computed once and reused'
+    },
+    {
+      id: 'state-2',
+      text: 'Derived state has a single source of truth'
+    },
+    {
+      id: 'state-3',
+      text: 'Avoided duplicating state logic across components'
+    },
+    {
+      id: 'state-4',
+      text: 'Data shape matches UI needs (minimal transformation in render)'
+    }
+  ],
+  codeExample: `// Good
+const callState = deriveCallState(status, transcripts);
+
+// Bad
+const isFailed = ...
+const isEmpty = ...
+const isUnsuccessful = ...`
+}
+
+
+
+
+{
+  id: 'smells',
+  title: '👃 Code Smell Detection',
+  items: [
+    {
+      id: 'smell-1',
+      text: 'Multiple booleans used to represent a single concept'
+    },
+    {
+      id: 'smell-2',
+      text: 'Component logic requires comments to explain why conditions exist'
+    },
+    {
+      id: 'smell-3',
+      text: 'Adding a new case would require touching many conditionals'
+    },
+    {
+      id: 'smell-4',
+      text: 'Logic feels harder to read than to write'
+    }
+  ]
+}
+
+
+
+
+
+
+
+*/
